@@ -1,0 +1,21 @@
+<%= form_for :post, url: { action: "create"}, :html => { :multipart => true } do |form| %>
+  <% if post.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
+      <ul>
+      <% post.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <p>Image</p>
+    <%= form.file_field :image %>
+    <p>Description</p>
+    <%= form.text_area :description, placeholder: 'Add a description' %><br><br>
+    <%= form.button "Save" %>
+  </div>
+
+<% end %>
