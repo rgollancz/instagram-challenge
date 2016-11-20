@@ -24,7 +24,7 @@ class PostsController < ApplicationController
     @post = Post.create(post_params)
     @post.user_id = current_user.id
     @post.save
-    redirect_to :index
+    redirect_to '/posts'
   end
 
   private

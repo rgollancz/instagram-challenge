@@ -7,6 +7,7 @@ require 'rspec/rails'
 require 'rails-controller-testing'
 require 'devise'
 require 'factory_girl_rails'
+require 'support/web_helpers'
 
 ActiveRecord::Migration.maintain_test_schema!
 
@@ -15,6 +16,7 @@ RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
   config.include Warden::Test::Helpers
   config.include Devise::Test::ControllerHelpers, :type => :controller
+  config.include WebHelpers, :type => :view
 
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
