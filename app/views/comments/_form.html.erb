@@ -1,4 +1,4 @@
-<%= form_for(comment) do |f| %>
+<%= form_for :comment, url: { action: "create"}, html: {class: "new_comment"} do |form| %>
   <% if comment.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
@@ -12,6 +12,9 @@
   <% end %>
 
   <div class="actions">
-    <%= f.submit %>
+    <p>Add comment</p>
+    <%= form.hidden_field :id, :value => @id  %>
+    <%= form.text_area :content, placeholder: 'Add comment' %><br><br>
+    <%= form.button "Save" %>
   </div>
 <% end %>

@@ -6,11 +6,7 @@ class CommentsController < ApplicationController
 
 
   def index
-    if !user_signed_in?
       redirect_to '/'
-    else
-      @comments = Comment.all
-    end
   end
 
   # GET /comments/1
@@ -20,6 +16,7 @@ class CommentsController < ApplicationController
 
   # GET /comments/new
   def new
+    @id = params[:post_id]
     @comment = Comment.new
   end
 
@@ -29,9 +26,9 @@ class CommentsController < ApplicationController
 
   # POST /comments
   def create
-    @post = Post.find_by_id(params[:post][:id])
+    @post = Post.find_by_id(params[:comment][:id])
     User.create_comment(@post, @currentUser, comment_params)
-    redirect_to '/restaurants'
+    redirect_to '/posts'
     # respond_to do |format|
     #   if @comment.save
     #     format.html { redirect_to @comment, notice: 'Comment was successfully created.' }
