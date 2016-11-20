@@ -5,5 +5,13 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :posts, dependent: :destroy
-  # has_many :commented_posts, through: :comments, source: :post
+  has_many :comments, dependent: :destroy
+  has_many :commented_posts, through: :comments, source: :post
+
+  def self.create_comment(post, currentUser, comment_params)
+    comment = post.comments.create(commment_params)
+    comment.user_id = currentUser
+    comment.save
+  end
+
 end
