@@ -27,6 +27,20 @@ class PostsController < ApplicationController
     redirect_to '/posts'
   end
 
+  def edit
+    @post = Post.find(params[:id])
+  end
+
+  def update
+    @post = Post.find(params[:id])
+    if @post.update_attributes!(post_params)
+      redirect_to '/posts'
+    else
+      flash[:notice] = "Your update could not be saved. Please try again."
+      redirect_to "/posts/#{params[:id]}/edit"
+    end
+  end
+
   private
 
   def post_params

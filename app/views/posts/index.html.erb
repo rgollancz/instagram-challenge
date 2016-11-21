@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Recents posts</h1>
+<h1>Recent posts</h1>
 
 <p><%= link_to 'Add new post', new_post_path %></p><br>
 
@@ -17,7 +17,7 @@
   <tbody>
     <tr>
       <td><%= link_to 'Edit', edit_post_path(post) %></td>
-      <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <td><%= link_to 'Delete', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
     </tr>
   </tbody>
 </table>
@@ -26,7 +26,10 @@
 <% comments = post.get_comments(post.id) %>
 <% comments.last(3).each do |comment| %>
 <%= User.find_by_id(comment.user_id).email%><br>
-<%= comment.content %><br>
+<%= comment.content %><br><br>
+  <% if user_signed_in? && comment.user_id == current_user.id %>
+  
+  <% end %>
 <% end %>
 <p><%= link_to 'Add comment', new_post_comment_path(post) %></p><br>
 <% end %>

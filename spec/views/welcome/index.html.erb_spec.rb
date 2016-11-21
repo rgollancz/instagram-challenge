@@ -10,8 +10,6 @@ RSpec.describe "welcome/index.html.erb", type: :view do
 
     scenario "redirects logged in user to posts" do
       create_user
-      visit '/'
-      follow_redirect!
       expect(page).to have_content("Recent posts")
     end
   end
